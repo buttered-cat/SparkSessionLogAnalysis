@@ -27,9 +27,8 @@ object Shakespear {
     val res = inputFile.filter(line => {
       if(line == "") {
         blankLineSum.add(1)
-        return false
-      }
-      return true
+        false
+      } else true
     }).flatMap(getWords(_))
       .filter(wordPair => !stopwords.value.contains(wordPair._2)).map(wordPair => (wordPair._2, (1, wordPair._1)))
       .reduceByKey((a, b) => (a._1 + b._1, a._2)).map(wordPair => (wordPair._2._2, wordPair._2._1))
