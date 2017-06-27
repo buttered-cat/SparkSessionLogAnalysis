@@ -13,7 +13,7 @@ object Shakespear {
     val outputPath = args(1)
 //    val stopWordPath = args(2)
 
-    val conf = new SparkConf().setAppName("Shakespear")
+    val conf = new SparkConf().setAppName("Shakespear").set("spark.shuffle.consolidateFiles", "true")
     val sc = new SparkContext(conf)
 
     val startTime = System.currentTimeMillis()
@@ -32,7 +32,8 @@ object Shakespear {
     }).flatMap(getWords(_))
       .filter(wordPair => !stopwords.value.contains(wordPair._2))
       .map(wordPair => (wordPair._2, (1, wordPair._1)))
-      .reduceByKey((a, b) => (a._1 + b._1, a._2)).map(wordPair => (wordPair._2._2, wordPair._2._1))
+      .reduceByKey((a, b) => (a._1 + b._1, a._2))
+      .map(wordPair => (wordPair._2._2, wordPair._2._1))
       .sortBy(_._2, false).take(100)
 
     val stopTime = System.currentTimeMillis()
