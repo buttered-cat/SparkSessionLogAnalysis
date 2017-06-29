@@ -17,15 +17,16 @@ object Shakespear {
     val outputPath = args(1)
 //    val stopWordPath = args(2)
 
+    val startTime = System.currentTimeMillis()
+
     val conf = new SparkConf().setAppName("Shakespear").set("spark.shuffle.consolidateFiles", "true")
     val sc = new SparkContext(conf)
 
-    val startTime = System.currentTimeMillis()
 
-    val numPartition = 15
-    val inputFile = sc.textFile(inputPath)
-      .persist(StorageLevel.MEMORY_ONLY).
-      coalesce(numPartition, false)
+//    val numPartition = 15
+//    val inputFile = sc.textFile(inputPath)
+//      .persist(StorageLevel.MEMORY_ONLY).
+//      .coalesce(numPartition, false)
 
 //    val inputFile = sc.newAPIHadoopFile[Text, LongWritable, CombineTextInputFormat](inputPath)
 //    inputFile.saveAsNewAPIHadoopFile(outputPath, classOf[LongWritable], classOf[Text],classOf[TextOutputFormat[LongWritable,Text]], conf)
@@ -37,25 +38,33 @@ object Shakespear {
 
     val ckpt1 = System.currentTimeMillis()
 
-    val res = inputFile.filter(line => {
+/*    val res = inputFile.filter(line => {
       if(line == "") {
         blankLineSum.add(1)
         false
       } else true
-    })
-      .flatMap(getWords(_))
-      .filter(word => !stopwords.value.contains(word.toLowerCase))
-      .map(word => (word, 1))
+    })*/
+
+
+    val res = sc.wholeTextFiles(inputPath, 12)
+//      .coalesce(12, true)
+      .flatMap(content => {         //(path. content)
+        "[a-zA-Z]+".r.findAllIn(content._2.toLowerCase/*possible optimization*/)
+          .filter(word => !stopwords.value.contains(word.toLowerCase))
+          .map((_, 1))
+      })                    //flatten contents
       .reduceByKey(_+_)
-//      .map(wordPair => (wordPair._2._2, wordPair._2._1))
       .sortBy(_._2, false).take(100)
+
+
+
 
     val stopTime = System.currentTimeMillis()
 
-    println(blankLineSum)
+//    println(blankLineSum)
     res.foreach(println(_))
-    println(ckpt1 - startTime)
-    println(stopTime - ckpt1)
+//    println(ckpt1 - startTime)
+//    println(stopTime - ckpt1)
     println(stopTime - startTime)
 
     sc.stop()
@@ -70,10 +79,10 @@ object Shakespear {
 
     def getStopWords() =
     {
-      val stopwords = Source.fromInputStream(Shakespear.getClass.getClassLoader.getResourceAsStream("stopword.txt")).getLines()
-      .map(_.trim()).toList
+      Source.fromInputStream(Shakespear.getClass.getClassLoader.getResourceAsStream("stopword.txt")).getLines()
+      .map(_.trim()).toSet
       //      stopwords ::: stopwords.map(_.capitalize) ::: stopwords.map(_.toUpperCase)
-      stopwords
+//      stopwords
     }
 
 }
