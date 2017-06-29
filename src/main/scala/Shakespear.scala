@@ -31,7 +31,8 @@ object Shakespear {
 //    val inputFile = sc.newAPIHadoopFile[Text, LongWritable, CombineTextInputFormat](inputPath)
 //    inputFile.saveAsNewAPIHadoopFile(outputPath, classOf[LongWritable], classOf[Text],classOf[TextOutputFormat[LongWritable,Text]], conf)
 
-    val stopwords = sc.broadcast(getStopWords())
+//    val stopwords = sc.broadcast(getStopWords())
+    val stopwords = getStopWords()        //no broadcasting
 
 //    val blankLineSum = inputFile.filter(line => line == "").count()
     val blankLineSum = sc.accumulator(0)
@@ -47,10 +48,10 @@ object Shakespear {
 
 
     val res = sc.wholeTextFiles(inputPath, 12)
-//      .coalesce(12, true)
+//    .coalesce(12, true)
       .flatMap(content => {         //(path. content)
         "[a-zA-Z]+".r.findAllIn(content._2.toLowerCase/*possible optimization*/)
-          .filter(word => !stopwords.value.contains(word.toLowerCase))
+          .filter(word => !stopwords.contains(word))
           .map((_, 1))
       })                    //flatten contents
       .reduceByKey(_+_)
