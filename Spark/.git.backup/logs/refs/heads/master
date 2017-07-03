@@ -1,0 +1,7 @@
+0000000000000000000000000000000000000000 bdf848c4ba9106e8af7486dc613ef1fcdb99a81d Your Name <you@example.com> 1498557379 +0800	commit (initial): init
+bdf848c4ba9106e8af7486dc613ef1fcdb99a81d 6ecef3e2ce801f5b26b9f906043a51dc19b7e0d5 Your Name <you@example.com> 1498557677 +0800	commit: minor syntax error
+6ecef3e2ce801f5b26b9f906043a51dc19b7e0d5 1e91f10810b139804fa943fb8321f0d3080b39a5 Your Name <you@example.com> 1498560535 +0800	commit: the time for current ver. is ~33000
+1e91f10810b139804fa943fb8321f0d3080b39a5 0d857134d1004eaeac040f8dd77f08d0b9c8b127 Your Name <you@example.com> 1498565273 +0800	commit: added shuffle.consolidateFiles option
+0d857134d1004eaeac040f8dd77f08d0b9c8b127 06db475e97c0e962632d207054120980e0047c43 Your Name <you@example.com> 1498723714 +0800	commit: no optimization: ~240s
+06db475e97c0e962632d207054120980e0047c43 e7c974fd04acda940032e79794fcedd262f60b86 Your Name <you@example.com> 1498727761 +0800	commit: no blank line summation; so far ~2min dead
+e7c974fd04acda940032e79794fcedd262f60b86 0a0cbde44cd38d4caa76b2de7fcedb8e185b246d Your Name <you@example.com> 1498737008 +0800	commit: give up. haven't dealt with blank lines.
