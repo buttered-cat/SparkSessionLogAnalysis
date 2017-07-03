@@ -2,7 +2,8 @@ package DataGenerate
 
 import java.io.{File, PrintWriter}
 import java.text.SimpleDateFormat
-import java.util.{Date, UUID}
+import java.util.{Calendar, Date, UUID}
+
 import scala.util.Random
 
 /**
@@ -20,6 +21,11 @@ object GenerateData {
     val userNum = 1000
     // 设置生成的点击数量
     val clickNum = 2000000
+
+    //懒了没写完...
+    val monthsWith31Days = Set(1,3,5,7,8,10,12)
+//    val monthsWith31Days = Set(1,3,5,7,8,10,12)
+
 
 
     /**
@@ -68,21 +74,26 @@ object GenerateData {
     val searchKeywords = Array("冰箱", "iphone6", "电视", "葡萄干", "尿不湿",
       "耳机", "小米5", "蚊帐", "牛排", "U盘")
     val actions = Array("search", "click", "order", "pay")
-    val date = getToday()
+    val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    val actionTimeFormat = new SimpleDateFormat("HH:mm:ss")
 
     for (i <- 0 to userNum){
       val userID = userArray(i)
 
       /**
-        * 每个用户对应1~·15条不等的session回话链接
+        * 每个用户对应1~15条不等的session记录
         */
       val sessionNum = random.nextInt(15)+1
       for (j <- 0 to sessionNum){
-
+        val date = {
+          var c = Calendar.getInstance()
+          c.set(Calendar.YEAR, 2014 + random.nextInt(4))        //[ , )
+          c.set(Calendar.MONTH, 1 + random.nextInt(12))
+          c.set(Calendar.DAY_OF_MONTH, 1 + random.nextInt(28))      //懒了没写完...
+          dateFormat.format(c.getTime)
+        }
         //定义一次session回话
         val sessiopnID = UUID.randomUUID().toString.replace("-", "")
-        //定义session的创建时间，也即是会话开始时间
-        val startSessionTime = date + " " + random.nextInt(23)
         var firstClickCategory = 0
         //随机返回访问0~50个页面
         val numPage = random.nextInt(50) + 1
@@ -93,8 +104,18 @@ object GenerateData {
           //访问的页面ID
           val pageID = random.nextInt(20)
           val action = actions(random.nextInt(4))
-          val actionTime = startSessionTime + ":" +
-            random.nextInt(59) + ":" + random.nextInt(59)
+
+          var c = Calendar.getInstance()
+          c.set(Calendar.HOUR, random.nextInt(24))
+          c.set(Calendar.MINUTE, random.nextInt(60))
+          c.set(Calendar.SECOND, random.nextInt(60))
+          val actionTime = date + " " + actionTimeFormat.format(c.getTime)
+          //定义session的创建时间，也即是会话开始时间
+
+          /*
+                    val actionTime = startSessionTime + ":" +
+                      random.nextInt(59) + ":" + random.nextInt(59)
+          */
 
           val Array(keywords, clickCategoryId, clickProductId, orderCategoryId,
           orderProductId, payCategoryId, payProductId) = {

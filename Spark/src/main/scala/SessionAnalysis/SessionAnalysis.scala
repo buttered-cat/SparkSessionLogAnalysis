@@ -21,8 +21,9 @@ object SessionAnalysis {
     val inputPath = { if(DEBUG) "" else args(0) }
     val outputPath = { if(DEBUG) "" else args(1) }
 
-    val cond = new UserFilterCondition(Some(18), Some(50), Some(Set("professional54", "professional55")), Some(Set("city26", "city7")))
+    val cond = new UserFilterCondition(Some(18), Some(50), None, Some(Set("city26")))
     val users = UserFilter.run(sc, inputPath, outputPath, cond)
+
     users.foreach(user => println(user._1, user._2.reduce(_+" "+_)))
     println(users.count())
   }
