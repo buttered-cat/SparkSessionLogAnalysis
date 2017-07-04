@@ -21,10 +21,11 @@ object GenerateData {
     val userNum = 1000
     // 设置生成的点击数量
     val clickNum = 2000000
+    var sessionActionID = 0
 
     //懒了没写完...
     val monthsWith31Days = Set(1,3,5,7,8,10,12)
-//    val monthsWith31Days = Set(1,3,5,7,8,10,12)
+//    val monthsWith30Days = Set(1,3,5,7,8,10,12)
 
 
 
@@ -93,7 +94,7 @@ object GenerateData {
           dateFormat.format(c.getTime)
         }
         //定义一次session回话
-        val sessiopnID = UUID.randomUUID().toString.replace("-", "")
+        val sessionID = UUID.randomUUID().toString.replace("-", "")
         var firstClickCategory = 0
         //随机返回访问0~50个页面
         val numPage = random.nextInt(50) + 1
@@ -117,8 +118,8 @@ object GenerateData {
                       random.nextInt(59) + ":" + random.nextInt(59)
           */
 
-          val Array(keywords, clickCategoryId, clickProductId, orderCategoryId,
-          orderProductId, payCategoryId, payProductId) = {
+          val Array(keywords, clickCategoryID, clickProductID, orderCategoryID,
+          orderProductID, payCategoryID, payProductID) = {
             if (action == "search")
               Array(searchKeywords(random.nextInt(10)), " ", " ", " ", " ", " ", " ")
             else if (action == "order")
@@ -135,11 +136,12 @@ object GenerateData {
               Array(" ", firstClickCategory,random.nextInt(5000) + 1, " ", " ", " ", " ")
           }
 
-          val record = date + "\t" + userID + "\t" + sessiopnID + "\t" + pageID + "\t" +
-            actionTime + "\t" + keywords + "\t" + clickCategoryId + "\t" + clickProductId + "\t" +
-            orderCategoryId + "\t" + orderProductId + "\t" + payCategoryId + "\t" + payProductId +
+          val record = sessionActionID + "\t" + date + "\t" + userID + "\t" + sessionID + "\t" + pageID + "\t" +
+            actionTime + "\t" + keywords + "\t" + clickCategoryID + "\t" + clickProductID + "\t" +
+            orderCategoryID + "\t" + orderProductID + "\t" + payCategoryID + "\t" + payProductID +
             "\t" + random.nextInt(10)
           writerCLick.println(record)
+          sessionActionID = sessionActionID + 1
         }
       }
     }

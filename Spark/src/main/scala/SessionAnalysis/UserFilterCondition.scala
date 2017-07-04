@@ -2,11 +2,15 @@ package SessionAnalysis
 
 /**
   * Created by Administrator on 2017/7/3.
+  *
+  * Inclusive bound
+  *
   */
 
 @SerialVersionUID(123L)
 class UserFilterCondition(AgeLo: Option[Int] = None, AgeHi: Option[Int] = None
-                          , Professions: Option[Set[String]] = None, Cities: Option[Set[String]] = None) extends Serializable
+                          , Professions: Option[Set[String]] = None, Cities: Option[Set[String]] = None)
+  extends Serializable
 {
   val ageLo: Option[Int] = AgeLo
   val ageHi: Option[Int] = AgeHi
