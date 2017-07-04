@@ -34,8 +34,8 @@ object SessionAnalysis {
       "耳机", "小米5", "蚊帐", "牛排", "U盘")
     val categories = (1 to 10).map(_.toString).toSet
 
-    val sessionFilterCond = new SessionFilterCondition(Some(sessionLeftBound)
-      , Some(sessionRightBound), Some(keywords), Some(categories))
+    val sessionFilterCond = new SessionFilterCondition(
+      Some(sessionLeftBound), Some(sessionRightBound), None, None)
     val sessionRecords = SessionFilter.run(sc, inputPath, outputPath, sessionFilterCond, users)
 
     

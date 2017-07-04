@@ -10,6 +10,7 @@ import scala.util.Random
   * Created by Administrator on 2017/7/1.
   */
 object GenerateData {
+  val writerCategory = new PrintWriter(new File("C:\\a\\test\\category.txt"))
   val writerProduct = new PrintWriter(new File("C:\\a\\test\\product.txt"))
   val writerUser = new PrintWriter(new File("C:\\a\\test\\user.txt"))
   val writerCLick = new PrintWriter(new File("C:\\a\\test\\click.log"))
@@ -25,7 +26,7 @@ object GenerateData {
 
     //懒了没写完...
     val monthsWith31Days = Set(1,3,5,7,8,10,12)
-//    val monthsWith30Days = Set(1,3,5,7,8,10,12)
+    //    val monthsWith30Days = Set(1,3,5,7,8,10,12)
 
 
 
@@ -68,13 +69,61 @@ object GenerateData {
       userArray(i) = userID
     }
 
+
+
+
+    val categoryStatus = Array(0, 1)
+    val numCategories = 100
+
+    for (i <- 0 until numCategories) {
+
+      val categoryID = i
+
+      val category_title = "category" + i
+
+      val extendnfo = "{" + "\"category_status\":" + categoryStatus(random.nextInt(2)) + "}"
+
+      val record = categoryID + "\t" + category_title + "\t" + extendnfo
+
+      writerCategory.println(record)
+
+    }
+
+
+
+
+
+
+
+
+    val productStatus = Array(0, 1)
+    val numProduct = 5000
+
+    for (i <- 0 until numProduct) {
+
+      val productID = i
+
+      val product_title = "product" + i
+
+      val category_id = random.nextInt(numCategories)
+
+      val extendnfo = "{" + "\"product_status\":" + productStatus(random.nextInt(2)) + "}"
+
+      val record = productID + "\t" + category_id + "\t" + product_title + "\t" + extendnfo
+
+      writerProduct.println(record)
+
+    }
+
+
+
     /**
       * 接着生成网购用户行为的模拟数据
       */
 
     val searchKeywords = Array("冰箱", "iphone6", "电视", "葡萄干", "尿不湿",
       "耳机", "小米5", "蚊帐", "牛排", "U盘")
-    val actions = Array("search", "click", "order", "pay")
+    val actions = Array("search", "click", "order", "pay", "browseCategory")
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd")
     val actionTimeFormat = new SimpleDateFormat("HH:mm:ss")
 
@@ -104,36 +153,34 @@ object GenerateData {
 
           //访问的页面ID
           val pageID = random.nextInt(20)
-          val action = actions(random.nextInt(4))
+          val action = actions(random.nextInt(5))
 
           var c = Calendar.getInstance()
           c.set(Calendar.HOUR, random.nextInt(24))
           c.set(Calendar.MINUTE, random.nextInt(60))
           c.set(Calendar.SECOND, random.nextInt(60))
           val actionTime = date + " " + actionTimeFormat.format(c.getTime)
-          //定义session的创建时间，也即是会话开始时间
-
-          /*
-                    val actionTime = startSessionTime + ":" +
-                      random.nextInt(59) + ":" + random.nextInt(59)
-          */
 
           val Array(keywords, clickCategoryID, clickProductID, orderCategoryID,
-          orderProductID, payCategoryID, payProductID) = {
+          orderProductID, payCategoryID, payProductID) =
+          {
             if (action == "search")
               Array(searchKeywords(random.nextInt(10)), " ", " ", " ", " ", " ", " ")
             else if (action == "order")
-              Array(" ", " ", " ", random.nextInt(50), random.nextInt(5000) + 1, " ", " ")
+              Array(" ", " ", " ", random.nextInt(numCategories), random.nextInt(numProduct), " ", " ")
             else if (action == "pay")
-              Array( " ", " ", " ", " ", " ", random.nextInt(50), random.nextInt(5000) + 1)
-            else if (action == "click" && 0 == firstClickCategory) {
-              firstClickCategory = random.nextInt(50) + 1
-              println("开始访问的商品类型为" + firstClickCategory)
+              Array( " ", " ", " ", " ", " ", random.nextInt(numCategories), random.nextInt(numProduct))
+            else if (action == "click") {
+              //              println("开始访问的商品类型为" + firstClickCategory)
+              firstClickCategory = random.nextInt(numCategories)
               Array(" ", firstClickCategory,
-                random.nextInt(5000) + 1, " ", " ", " ", " ")
+                random.nextInt(numProduct), " ", " ", " ", " ")
             }
             else
-              Array(" ", firstClickCategory,random.nextInt(5000) + 1, " ", " ", " ", " ")
+            {
+              firstClickCategory = random.nextInt(numCategories)
+              Array(" ", firstClickCategory, " ", " ", " ", " ", " ")
+            }
           }
 
           val record = sessionActionID + "\t" + date + "\t" + userID + "\t" + sessionID + "\t" + pageID + "\t" +
@@ -147,32 +194,18 @@ object GenerateData {
     }
 
 
-    val productStatus = Array(0, 1)
-    val numProduct = 5000
-
-    for (i <- 0 to numProduct) {
-
-      val productID = i
-
-      val product_title = "product" + i
-
-      val extendnfo = "{" + "\"product_status\":" + productStatus(random.nextInt(2)) + "}"
-
-      val record = productID + "\t" + product_title + "\t" + extendnfo
-
-      writerProduct.println(record)
-
-    }
     writerCLick.close()
     writerProduct.close()
     writerUser.close()
+    writerCategory.close()
+
   }
 
-   def getToday() = {
+  def getToday() = {
     val date = new Date()
     val format = new SimpleDateFormat("yyyy-MM-dd")
     val ret = format.format(date)
-     ret
+    ret
   }
 
 }
