@@ -22,7 +22,9 @@ object SessionFilter {
 
   def run(sc: SparkContext, input: String, output: String
           , cond: SessionFilterCondition
-          , users: RDD[(String, Array[String])]): RDD[(String, (Array[String], Array[String]))] =
+          , users: RDD[(String, Array[String])]
+          , categoryStatAcc: CategoryStatAccumulator
+         ): RDD[(String, (Array[String], Array[String]))] =
   {
     val inputPath = {
       if (DEBUG) "C:\\a\\test\\click.log" else input
@@ -39,6 +41,7 @@ object SessionFilter {
     val clickRecords = sc.textFile(inputPath, numProcessors)
       .map(line => line.split("\t"))
       .filter(condition.value isValidClick)
+      .filter(aggregateCategory(_, categoryStatAcc))
       .map(array => (array(sessionRawIndex("userID")),
         Array(array(sessionRawIndex("sessionID"))
           , array(sessionRawIndex("sessionActionID"))
@@ -59,5 +62,16 @@ object SessionFilter {
     val clickRecordsOfUsers = users.join(clickRecords)
 
     return clickRecordsOfUsers
+  }
+
+  def aggregateCategory(record: Array[String], categoryStatAcc: CategoryStatAccumulator): Boolean =
+  {
+    if(record(sessionRawIndex("clickCategoryID")) != " ")
+      categoryStatAcc.add((record(sessionRawIndex("clickCategoryID")).toInt, categoryStatAcc.CLICK))
+    else if(record(sessionRawIndex("orderCategoryID")) != " ")
+      categoryStatAcc.add((record(sessionRawIndex("orderCategoryID")).toInt, categoryStatAcc.ORDER))
+    else if(record(sessionRawIndex("payCategoryID")) != " ")
+      categoryStatAcc.add((record(sessionRawIndex("payCategoryID")).toInt, categoryStatAcc.PAY))
+    true
   }
 }
