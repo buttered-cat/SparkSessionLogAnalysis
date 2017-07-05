@@ -26,9 +26,6 @@ class CategoryStatAccumulator(Stat: Map[Int, Array[Int]]/*sc: SparkContext, Data
     stat += ( pair._1 -> Array(pair._2(CLICK), pair._2(ORDER), pair._2(PAY)))
   })
 
-  println(Stat(0))
-  println(stat(0))
-
 /*  var categories = sc.textFile(dataPath)
     .map(line => {
       stat += (line.split("\t")(0).toInt -> Array(0, 0, 0))

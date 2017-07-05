@@ -15,7 +15,7 @@ object SessionAnalysis {
   val PRINT_DEBUG_INFO = true
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Session Analysis").set("spark.shuffle.consolidateFiles", "true")
-      .setMaster("local[1]")
+      .setMaster("local[4]")
     val sc = new SparkContext(conf)
 //    val sqlContext = new SQLContext(sc)
 
@@ -37,6 +37,7 @@ object SessionAnalysis {
     val sessionFilterCond = new SessionFilterCondition(
       Some(sessionLeftBound), Some(sessionRightBound), None, None)
     val sessionRecords = SessionFilter.run(sc, inputPath, outputPath, sessionFilterCond, users, categoryStatAcc)
+      .collect()
 
     // get top10 categories
     // 惰性求值把我坑惨了！
@@ -44,15 +45,15 @@ object SessionAnalysis {
     val categoryStat = categoryStatAcc.value.map(stat =>
       (stat._1, (stat._2(categoryStatAcc.CLICK), stat._2(categoryStatAcc.ORDER), stat._2(categoryStatAcc.PAY))))
       .toList
-      .sortBy(_._2).take(numCategoriesDemanded)
-    
+      .sortBy(_._2).reverse.take(numCategoriesDemanded)
+
 
     if(DEBUG && PRINT_DEBUG_INFO)
     {
       users.foreach(user => println(user._1, user._2.reduce(_+" "+_)))
 //      sessionRecords.foreach(rec => println(rec._1, rec._2._1.reduce(_+" "+_), " | ", rec._2._2.reduce(_+" "+_)))
       println(users.count())
-      println(sessionRecords.count())
+      println(sessionRecords.length)
       categoryStat.foreach(println)
     }
 
