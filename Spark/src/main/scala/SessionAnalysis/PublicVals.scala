@@ -1,5 +1,7 @@
 package SessionAnalysis
 
+import java.text.SimpleDateFormat
+
 /**
   * Created by Administrator on 2017/7/4.
   */
@@ -21,5 +23,7 @@ object PublicVals {
     "reservedField" -> 13
   )
 
+  val datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+  val datetimeFormatStr = "yyyy-MM-dd HH:mm:ss"
 
 }

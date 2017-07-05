@@ -34,9 +34,11 @@ object SessionAnalysis {
 
     // get valid sessions
     var categoryStatAcc = RegisterCategoryAccumulators.run(sc, "")
+    var sessionStatAcc = RegisterSessionAccumulators.run(sc)
     val sessionFilterCond = new SessionFilterCondition(
       Some(sessionLeftBound), Some(sessionRightBound), None, None)
-    val sessionRecords = SessionFilter.run(sc, inputPath, outputPath, sessionFilterCond, users, categoryStatAcc)
+    val sessionRecords = SessionFilter.run(
+      sc, inputPath, outputPath, sessionFilterCond, users, categoryStatAcc, sessionStatAcc)
       .collect()
 
     // get top10 categories
@@ -47,6 +49,8 @@ object SessionAnalysis {
       .toList
       .sortBy(_._2).reverse.take(numCategoriesDemanded)
 
+    val sessionStat = sessionStatAcc.sumUpStats()
+
 
     if(DEBUG && PRINT_DEBUG_INFO)
     {
@@ -55,6 +59,7 @@ object SessionAnalysis {
       println(users.count())
       println(sessionRecords.length)
       categoryStat.foreach(println)
+      sessionStat.toList.sortBy(_._1).foreach(println)
     }
 
   }

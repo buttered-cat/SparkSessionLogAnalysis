@@ -8,16 +8,12 @@ import org.apache.spark.util.AccumulatorV2
   */
 
 @SerialVersionUID(125L)
-class CategoryStatAccumulator(Stat: Map[Int, Array[Int]]/*sc: SparkContext, DataPath: String*/)
+class CategoryStatAccumulator(Stat: Map[Int, Array[Int]])
   extends AccumulatorV2[(Int, Int), Map[Int, Array[Int]]] with Serializable
 {
-//  var DEBUG = true
-
   val CLICK = 0
   val ORDER = 1
   val PAY = 2
-
-//  val dataPath = {if(DEBUG) "C:\\a\\test\\category.txt" else DataPath}
 
   var stat: Map[Int, Array[Int]] = Map[Int, Array[Int]]()
 
@@ -26,15 +22,9 @@ class CategoryStatAccumulator(Stat: Map[Int, Array[Int]]/*sc: SparkContext, Data
     stat += ( pair._1 -> Array(pair._2(CLICK), pair._2(ORDER), pair._2(PAY)))
   })
 
-/*  var categories = sc.textFile(dataPath)
-    .map(line => {
-      stat += (line.split("\t")(0).toInt -> Array(0, 0, 0))
-    })*/
-
   override def add(categoryIDAction: (Int, Int)): Unit =
   {
     stat(categoryIDAction._1)(categoryIDAction._2) += 1
-//    println(categoryIDAction._1 + " " + categoryIDAction._2 + " " + "+1s")
   }
 
   override def copy(): CategoryStatAccumulator =
@@ -45,8 +35,6 @@ class CategoryStatAccumulator(Stat: Map[Int, Array[Int]]/*sc: SparkContext, Data
 
   override def isZero: Boolean =
   {
-//    if(stat.isEmpty) true
-//    else false
     true
   }
 
@@ -65,7 +53,6 @@ class CategoryStatAccumulator(Stat: Map[Int, Array[Int]]/*sc: SparkContext, Data
         s"Cannot merge ${this.getClass.getName} with ${other.getClass.getName}")
 
   }
-
 
   override def reset(): Unit =
   {

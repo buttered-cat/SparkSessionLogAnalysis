@@ -24,6 +24,7 @@ object SessionFilter {
           , cond: SessionFilterCondition
           , users: RDD[(String, Array[String])]
           , categoryStatAcc: CategoryStatAccumulator
+          , sessionStatAcc: SessionStatAccumulator
          ): RDD[(String, (Array[String], Array[String]))] =
   {
     val inputPath = {
@@ -38,30 +39,31 @@ object SessionFilter {
 
     val condition = sc.broadcast(cond)
 
-    val clickRecords = sc.textFile(inputPath, numProcessors)
+    val sessionRecords = sc.textFile(inputPath, numProcessors)
       .map(line => line.split("\t"))
       .filter(condition.value isValidClick)
       .filter(aggregateCategory(_, categoryStatAcc))
-      .map(array => (array(sessionRawIndex("userID")),
-        Array(array(sessionRawIndex("sessionID"))
-          , array(sessionRawIndex("sessionActionID"))
-          , array(sessionRawIndex("date"))
-          , array(sessionRawIndex("pageID"))
-          , array(sessionRawIndex("actionTime"))
-          , array(sessionRawIndex("keywords"))
-          , array(sessionRawIndex("clickCategoryID"))
-          , array(sessionRawIndex("clickProductID"))
-          , array(sessionRawIndex("orderCategoryID"))
-          , array(sessionRawIndex("orderProductID"))
-          , array(sessionRawIndex("payCategoryID"))
-          , array(sessionRawIndex("payProductID"))
-          , array(sessionRawIndex("reservedField"))
+      .filter(aggregateSessions(_, sessionStatAcc))
+      .map(rec => (rec(sessionRawIndex("userID")),
+        Array(rec(sessionRawIndex("sessionID"))
+          , rec(sessionRawIndex("sessionActionID"))
+          , rec(sessionRawIndex("date"))
+          , rec(sessionRawIndex("pageID"))
+          , rec(sessionRawIndex("actionTime"))
+          , rec(sessionRawIndex("keywords"))
+          , rec(sessionRawIndex("clickCategoryID"))
+          , rec(sessionRawIndex("clickProductID"))
+          , rec(sessionRawIndex("orderCategoryID"))
+          , rec(sessionRawIndex("orderProductID"))
+          , rec(sessionRawIndex("payCategoryID"))
+          , rec(sessionRawIndex("payProductID"))
+          , rec(sessionRawIndex("reservedField"))
         )))
 
 
-    val clickRecordsOfUsers = users.join(clickRecords)
+    val sessionRecordsWithUser = sessionRecords.join(users)
 
-    return clickRecordsOfUsers
+    return sessionRecordsWithUser
   }
 
   def aggregateCategory(record: Array[String], categoryStatAcc: CategoryStatAccumulator): Boolean =
@@ -72,6 +74,12 @@ object SessionFilter {
       categoryStatAcc.add((record(sessionRawIndex("orderCategoryID")).toInt, categoryStatAcc.ORDER))
     else if(record(sessionRawIndex("payCategoryID")) != " ")
       categoryStatAcc.add((record(sessionRawIndex("payCategoryID")).toInt, categoryStatAcc.PAY))
+    true
+  }
+
+  def aggregateSessions(record: Array[String], sessionStatAcc: SessionStatAccumulator): Boolean =
+  {
+    sessionStatAcc.add(record(sessionRawIndex("sessionID")), record(sessionRawIndex("actionTime")))
     true
   }
 }

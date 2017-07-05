@@ -142,6 +142,11 @@ object GenerateData {
           c.set(Calendar.DAY_OF_MONTH, 1 + random.nextInt(28))      //懒了没写完...
           dateFormat.format(c.getTime)
         }
+
+        var time = Calendar.getInstance()
+        time.set(Calendar.HOUR, random.nextInt(24))
+        time.set(Calendar.MINUTE, random.nextInt(60))
+
         //定义一次session回话
         val sessionID = UUID.randomUUID().toString.replace("-", "")
         var firstClickCategory = 0
@@ -155,11 +160,8 @@ object GenerateData {
           val pageID = random.nextInt(20)
           val action = actions(random.nextInt(5))
 
-          var c = Calendar.getInstance()
-          c.set(Calendar.HOUR, random.nextInt(24))
-          c.set(Calendar.MINUTE, random.nextInt(60))
-          c.set(Calendar.SECOND, random.nextInt(60))
-          val actionTime = date + " " + actionTimeFormat.format(c.getTime)
+          time.set(Calendar.SECOND, time.get(Calendar.SECOND) + random.nextInt(10))
+          val actionTime = date + " " + actionTimeFormat.format(time.getTime)
 
           val Array(keywords, clickCategoryID, clickProductID, orderCategoryID,
           orderProductID, payCategoryID, payProductID) =
