@@ -28,7 +28,7 @@
       <file leaf-file-name="SessionFilterCondition.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilterCondition.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="494">
               <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
               <folding>
                 <element signature="e#25#58#0" expanded="true" />
@@ -37,37 +37,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionStatAccumulator.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SessionStatAccumulator.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionStatAccumulator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-133">
-              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="211">
+              <caret line="77" column="38" lean-forward="true" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
               <folding>
                 <element signature="e#25#58#0" expanded="true" />
-                <element signature="e#3318#3568#0" expanded="false" />
-                <element signature="e#3430#3553#0" expanded="false" />
-                <element signature="e#3572#3619#0" expanded="false" />
-                <element signature="e#3623#4846#0" expanded="false" />
-                <element signature="e#3721#4846#0" expanded="false" />
-                <element signature="e#3781#4699#0" expanded="false" />
-                <element signature="e#3800#4699#0" expanded="false" />
-                <element signature="e#3865#4559#0" expanded="false" />
-                <element signature="e#4581#4690#0" expanded="false" />
-                <element signature="e#4721#4842#0" expanded="false" />
-                <element signature="e#4760#4842#0" expanded="false" />
-                <element signature="e#4850#4886#0" expanded="false" />
-                <element signature="e#4890#4955#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenerateData.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/GenerateData.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="190" column="4" lean-forward="false" selection-start-line="190" selection-start-column="4" selection-end-line="201" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -75,7 +52,7 @@
       <file leaf-file-name="CategoryStatAccumulator.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/CategoryStatAccumulator.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
+            <state relative-caret-position="589">
               <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
               <folding />
             </state>
@@ -85,10 +62,22 @@
       <file leaf-file-name="SessionAnalysis.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionAnalysis.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+            <state relative-caret-position="-125">
+              <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
               <folding>
                 <element signature="e#25#58#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionFilter.scala" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="56" selection-end-column="48" />
+              <folding>
+                <element signature="e#25#61#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,21 +96,29 @@
       <file leaf-file-name="RegisterCategoryAccumulators.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/RegisterCategoryAccumulators.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+            <state relative-caret-position="475">
+              <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionFilter.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala">
+      <file leaf-file-name="UserFilter.scala" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilter.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="673">
-              <caret line="81" column="56" lean-forward="false" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="56" />
-              <folding>
-                <element signature="e#25#61#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="426">
+              <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RDD.scala" pinned="false" current-in-tab="false">
+        <entry file="jar://E:/mavenjar/org/apache/spark/spark-core_2.10/1.6.0/spark-core_2.10-1.6.0-sources.jar!/org/apache/spark/rdd/RDD.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,19 +126,11 @@
       <file leaf-file-name="PublicVals.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/PublicVals.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserFilterCondition.scala" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilterCondition.scala">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="25" column="21" lean-forward="false" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="327">
+              <caret line="45" column="16" lean-forward="true" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+              <folding>
+                <element signature="e#25#58#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -191,7 +180,6 @@
         <option value="$PROJECT_DIR$/Spark/src/main/scala/MockClickData.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionAggregation.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/Shakespear.scala" />
-        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilter.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/ClickLogFilter.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/ClickLogFilterCondition.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilterCondition.scala" />
@@ -199,13 +187,14 @@
         <option value="$PROJECT_DIR$/../Scala - 副本/Spark/src/main/scala/SessionAnalysis/PublicVals.scala" />
         <option value="$PROJECT_DIR$/Spark/pom.xml" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/GenerateData.scala" />
-        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/RegisterCategoryAccumulators.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/RegisterSessionAccumulators.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/CategoryStatAccumulator.scala" />
-        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/PublicVals.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionStatAccumulator.scala" />
+        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilter.scala" />
+        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/PublicVals.scala" />
         <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionAnalysis.scala" />
+        <option value="$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala" />
       </list>
     </option>
   </component>
@@ -1045,8 +1034,8 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.SessionAnalysis" />
-        <item index="1" class="java.lang.String" itemvalue="Application.GenerateData" />
-        <item index="2" class="java.lang.String" itemvalue="Scala Console.Scala Console" />
+        <item index="1" class="java.lang.String" itemvalue="Scala Console.Scala Console" />
+        <item index="2" class="java.lang.String" itemvalue="Application.GenerateData" />
         <item index="3" class="java.lang.String" itemvalue="Application.StreamingWordCount" />
         <item index="4" class="java.lang.String" itemvalue="Application.ClosureTest" />
       </list>
@@ -1089,12 +1078,12 @@
       <workItem from="1499066678704" duration="11334000" />
       <workItem from="1499082763790" duration="794000" />
       <workItem from="1499130341108" duration="8184000" />
-      <workItem from="1499216851155" duration="20286000" />
+      <workItem from="1499216851155" duration="26935000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143549000" />
+    <option name="totallyTimeSpent" value="150198000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1127,8 +1116,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293348" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42857143" sideWeight="0.4936034" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293348" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29880044" sideWeight="0.4936034" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32497275" sideWeight="0.48666668" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21588486" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1150,7 +1139,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="32" />
+      <option name="time" value="38" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1346,20 +1335,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://E:/mavenjar/org/apache/spark/spark-core_2.10/1.6.0/spark-core_2.10-1.6.0-sources.jar!/org/apache/spark/rdd/RDD.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1473" column="19" lean-forward="false" selection-start-line="1473" selection-start-column="19" selection-end-line="1473" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="33" lean-forward="true" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Scala - 副本/Spark/src/main/scala/GenerateData.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-342">
@@ -1447,9 +1422,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/GenerateData.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="63" column="42" lean-forward="false" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilterCondition.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
+        <state relative-caret-position="494">
           <caret line="32" column="72" lean-forward="false" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
           <folding>
             <element signature="e#25#58#0" expanded="true" />
@@ -1457,18 +1440,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/PublicVals.scala">
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/CategoryStatAccumulator.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="23" />
+        <state relative-caret-position="589">
+          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionStatAccumulator.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="77" column="38" lean-forward="true" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+          <folding>
+            <element signature="e#25#58#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/RegisterCategoryAccumulators.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="41" lean-forward="false" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+        <state relative-caret-position="475">
+          <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/PublicVals.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="45" column="16" lean-forward="true" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+          <folding>
+            <element signature="e#25#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/mavenjar/org/apache/spark/spark-core_2.10/1.6.0/spark-core_2.10-1.6.0-sources.jar!/org/apache/spark/rdd/RDD.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/UserFilter.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="24" column="27" lean-forward="false" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1481,61 +1500,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="81" column="56" lean-forward="false" selection-start-line="81" selection-start-column="47" selection-end-line="81" selection-end-column="56" />
-          <folding>
-            <element signature="e#25#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/CategoryStatAccumulator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="50" column="13" lean-forward="true" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionAnalysis.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+        <state relative-caret-position="-125">
+          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
           <folding>
             <element signature="e#25#58#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/GenerateData.scala">
+    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionFilter.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="190" column="4" lean-forward="false" selection-start-line="190" selection-start-column="4" selection-end-line="201" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Spark/src/main/scala/SessionAnalysis/SessionStatAccumulator.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="450">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="56" selection-end-column="48" />
           <folding>
-            <element signature="e#25#58#0" expanded="true" />
-            <element signature="e#3318#3568#0" expanded="false" />
-            <element signature="e#3430#3553#0" expanded="false" />
-            <element signature="e#3572#3619#0" expanded="false" />
-            <element signature="e#3623#4846#0" expanded="false" />
-            <element signature="e#3721#4846#0" expanded="false" />
-            <element signature="e#3781#4699#0" expanded="false" />
-            <element signature="e#3800#4699#0" expanded="false" />
-            <element signature="e#3865#4559#0" expanded="false" />
-            <element signature="e#4581#4690#0" expanded="false" />
-            <element signature="e#4721#4842#0" expanded="false" />
-            <element signature="e#4760#4842#0" expanded="false" />
-            <element signature="e#4850#4886#0" expanded="false" />
-            <element signature="e#4890#4955#0" expanded="false" />
+            <element signature="e#25#61#0" expanded="true" />
           </folding>
         </state>
       </provider>

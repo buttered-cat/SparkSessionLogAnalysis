@@ -7,14 +7,8 @@ import PublicVals._
 /**
   * Created by Administrator on 2017/7/3.
   *
-  * Indexes: (better off using Map...but I'm lazy and it's important to be idle :)
   *
-  * (userId1, (sessionId2, date0, pageId3, actionTime4 + 5, keywords6, clickCategoryId7
-  * , clickProductId8, orderCategoryId9, orderProductId10, payCategoryId11
-  * , payProductId12, randomInt13))
   *
-  * @return
-  *         RDD[(userID, ((Array of user info), (Array of session record info)))]
   *
   */
 object SessionFilter {
@@ -25,7 +19,7 @@ object SessionFilter {
           , users: RDD[(String, Array[String])]
           , categoryStatAcc: CategoryStatAccumulator
           , sessionStatAcc: SessionStatAccumulator
-         ): RDD[(String, (Array[String], Array[String]))] =
+         ): RDD[(String, String)] =
   {
     val inputPath = {
       if (DEBUG) "C:\\a\\test\\click.log" else input
@@ -38,12 +32,16 @@ object SessionFilter {
     }
 
     val condition = sc.broadcast(cond)
+    val knownKeywords = Set[String]()
+    val knownCategories = Set[String]()
+    val categoryDict = getCategoryDict(sc, "")
 
     val sessionRecords = sc.textFile(inputPath, numProcessors)
       .map(line => line.split("\t"))
       .filter(condition.value isValidClick)
       .filter(aggregateCategory(_, categoryStatAcc))
       .filter(aggregateSessions(_, sessionStatAcc))
+
       .map(rec => (rec(sessionRawIndex("userID")),
         Array(rec(sessionRawIndex("sessionID"))
           , rec(sessionRawIndex("sessionActionID"))
@@ -60,10 +58,70 @@ object SessionFilter {
           , rec(sessionRawIndex("reservedField"))
         )))
 
+      .join(users)
 
-    val sessionRecordsWithUser = sessionRecords.join(users)
+      .map(rec =>
+        (
+          rec._2._1(sessionRDDIndex("sessionID")),
+          Array(rec._2._1(sessionRDDIndex("sessionID"))
+            , {
+              if(rec._2._1(sessionRDDIndex("keywords")) == " ")
+                ""
+              else rec._2._1(sessionRDDIndex("keywords"))
+            }
+            , {
+              if(rec._2._1(sessionRDDIndex("clickCategoryID")) != " ")
+                categoryDict( rec._2._1(sessionRDDIndex("clickCategoryID")).toInt )
+              else ""
+            }
+            , rec._2._2(userRDDIndex("age"))
+            , rec._2._2(userRDDIndex("profession"))
+            , rec._2._2(userRDDIndex("city"))
+            , rec._2._2(userRDDIndex("gender"))
+          )
+        )
+      )
 
-    return sessionRecordsWithUser
+      .reduceByKey((s1, s2) =>
+        {
+
+
+          Array(
+            s1( finalSessionMapIndex("sessionID") )
+            , s1( finalSessionMapIndex("keywords") ) +
+              {
+                {
+                  if(s1( finalSessionMapIndex("keywords") ) != ""
+                    && s2( finalSessionMapIndex("keywords") ) != "") ","
+                  else ""
+                } + s2( finalSessionMapIndex("keywords") )
+              }
+            , s1( finalSessionMapIndex("clickCategories") ) +
+              {
+                { if(s1( finalSessionMapIndex("clickCategories") ) != ""
+                    && s2( finalSessionMapIndex("clickCategories") ) != "") ","
+                  else ""
+                } + s2( finalSessionMapIndex("clickCategories") )
+              }
+            , s1( finalSessionMapIndex("age") )
+            , s1( finalSessionMapIndex("profession") )
+            , s1( finalSessionMapIndex("city") )
+            , s1( finalSessionMapIndex("gender") )
+          )
+        }
+      )
+      .map(session => (
+        session._1,
+        "sessionid=" + session._2( finalSessionMapIndex("sessionID") )
+          + "|" + "searchword=" + session._2( finalSessionMapIndex("keywords") )
+          + "|" + "clickcaterory=" + session._2( finalSessionMapIndex("clickCategories") )
+          + "|" + "age=" + session._2( finalSessionMapIndex("age") )
+          + "|" + "profession=" + session._2( finalSessionMapIndex("profession") )
+          + "|" + "city=" + session._2( finalSessionMapIndex("city") )
+          + "|" + "gender=" + session._2( finalSessionMapIndex("gender") )
+      ))
+
+    return sessionRecords
   }
 
   def aggregateCategory(record: Array[String], categoryStatAcc: CategoryStatAccumulator): Boolean =

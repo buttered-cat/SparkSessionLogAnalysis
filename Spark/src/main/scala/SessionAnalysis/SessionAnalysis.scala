@@ -15,7 +15,7 @@ object SessionAnalysis {
   val PRINT_DEBUG_INFO = true
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Session Analysis").set("spark.shuffle.consolidateFiles", "true")
-      .setMaster("local[4]")
+      .setMaster("local[1]")
     val sc = new SparkContext(conf)
 //    val sqlContext = new SQLContext(sc)
 
@@ -54,8 +54,9 @@ object SessionAnalysis {
 
     if(DEBUG && PRINT_DEBUG_INFO)
     {
-      users.foreach(user => println(user._1, user._2.reduce(_+" "+_)))
+//      users.foreach(user => println(user._1, user._2.reduce(_+" "+_)))
 //      sessionRecords.foreach(rec => println(rec._1, rec._2._1.reduce(_+" "+_), " | ", rec._2._2.reduce(_+" "+_)))
+      sessionRecords.foreach(println)
       println(users.count())
       println(sessionRecords.length)
       categoryStat.foreach(println)
