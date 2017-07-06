@@ -15,28 +15,23 @@ object SessionAnalysis {
   val PRINT_DEBUG_INFO = true
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Session Analysis").set("spark.shuffle.consolidateFiles", "true")
-      .setMaster("local[1]")
+      .setMaster("local[4]")
     val sc = new SparkContext(conf)
-//    val sqlContext = new SQLContext(sc)
 
     val inputPath = { if(DEBUG) "" else args(0) }
     val outputPath = { if(DEBUG) "" else args(1) }
     val datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-    val userFilterCond = new UserFilterCondition(Some(18), Some(50), None, None)
-    val users = UserFilter.run(sc, inputPath, outputPath, userFilterCond)
+    val task = GetTaskById.run({ if(DEBUG) 2 else args(2).toInt })
 
-    val sessionLeftBound = datetimeFormat.parse("2017-01-01 00:00:00")
-    val sessionRightBound = datetimeFormat.parse("2017-07-01 00:00:00")
-    val keywords = Set("冰箱", "iphone6", "电视", "葡萄干", "尿不湿",
-      "耳机", "小米5", "蚊帐", "牛排", "U盘")
-    val categories = (1 to 10).map(_.toString).toSet
+    val userFilterCond = new UserFilterCondition(task.ageLo, task.ageHi, task.professions, task.cities)
+    val users = UserFilter.run(sc, inputPath, outputPath, userFilterCond)
 
     // get valid sessions
     var categoryStatAcc = RegisterCategoryAccumulators.run(sc, "")
     var sessionStatAcc = RegisterSessionAccumulators.run(sc)
     val sessionFilterCond = new SessionFilterCondition(
-      Some(sessionLeftBound), Some(sessionRightBound), None, None)
+      task.sessionStartFrom, task.sessionUntil, task.keywords, task.categoryIDs)
     val sessionRecords = SessionFilter.run(
       sc, inputPath, outputPath, sessionFilterCond, users, categoryStatAcc, sessionStatAcc)
       .collect()
@@ -49,6 +44,7 @@ object SessionAnalysis {
       .toList
       .sortBy(_._2).reverse.take(numCategoriesDemanded)
 
+    // get session statistics
     val sessionStat = sessionStatAcc.sumUpStats()
 
 
