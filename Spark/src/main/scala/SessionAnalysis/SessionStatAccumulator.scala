@@ -34,6 +34,7 @@ class SessionStatAccumulator extends AccumulatorV2[(String, String), Map[String,
 
 
   var stat: Map[String, Array[String]] = Map[String, Array[String]]()
+  var clickCategories: mutable.Map[String, Set[String]] = mutable.Map[String, Set[String]]()
 
   override def add(sessionIDAction: (String, String)): Unit =
   {
@@ -71,6 +72,19 @@ class SessionStatAccumulator extends AccumulatorV2[(String, String), Map[String,
       stat += (sessionIDAction._1 -> Array("1", sessionIDAction._2, sessionIDAction._2))
     }
 
+  }
+
+  def addKeyword(sessionKeyword: (String, String)): Unit =
+  {
+    if( sessionKeyword._2 == ""
+      || sessionKeyword._2 == " " )
+      throw new Exception
+
+    if(clickCategories.get(sessionKeyword._1) isDefined)
+      clickCategories(sessionKeyword._1) += sessionKeyword._2
+
+    else
+      clickCategories += (sessionKeyword._1 -> Set[String]())
   }
 
   def sumUpStats(): mutable.Map[Int, Int] =
@@ -111,6 +125,19 @@ class SessionStatAccumulator extends AccumulatorV2[(String, String), Map[String,
     })
 
     allStats
+  }
+
+  def sessionClickCategoryContains(sessionID: String, clickCategoryCond: Set[String]): Boolean =
+  {
+    val clickCategory = clickCategories.get(sessionID)
+    if (clickCategory isDefined)
+    {
+      if ((clickCategory.get & clickCategoryCond) != clickCategoryCond)
+        return false
+      else return true
+    }
+    else throw new Exception("sessionID doesn't exist in click categories.")
+//    return false
   }
 
   override def copy(): SessionStatAccumulator =

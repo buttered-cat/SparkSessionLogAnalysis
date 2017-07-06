@@ -23,26 +23,25 @@ class SessionFilterCondition(StartTime: Option[Date] = None, EndTime: Option[Dat
   val endTime = EndTime
   val keywords = Keywords
   val categories = Categories
-  val datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
-  def isValidClick(click: Array[String]): Boolean =
+  def isValidClick(click: Array[String], sessionStatAcc: SessionStatAccumulator): Boolean =
   {
     if(startTime isDefined)
+    {
+      val datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
       if(datetimeFormat.parse(click(sessionRawIndex("actionTime"))).compareTo(startTime.get) < 0) return false
+    }
     if(endTime isDefined)
+    {
+      val datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
       if(datetimeFormat.parse(click(sessionRawIndex("actionTime"))).compareTo(endTime.get) > 0) return false
+    }
     if(keywords isDefined)
       if(!(keywords.get contains click(sessionRawIndex("keywords")))) return false
     if(categories isDefined)
-      if((categories.get & Set(
-        click(sessionRawIndex("clickCategoryID"))
-        , click(sessionRawIndex("orderCategoryID"))
-        , click(sessionRawIndex("payCategoryID"))
-      )) != Set(
-        click(sessionRawIndex("clickCategoryID"))
-        , click(sessionRawIndex("orderCategoryID"))
-        , click(sessionRawIndex("payCategoryID"))
-      ))
+      if(sessionStatAcc.sessionClickCategoryContains(
+        click(sessionRawIndex("sessionID")), categories.get)
+      )
         return false
     return true
   }

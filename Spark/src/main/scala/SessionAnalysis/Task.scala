@@ -4,8 +4,6 @@ import java.util.Date
 
 import DB._
 
-import scala.collection.mutable
-
 /**
   * Created by Administrator on 2017/7/6.
   */

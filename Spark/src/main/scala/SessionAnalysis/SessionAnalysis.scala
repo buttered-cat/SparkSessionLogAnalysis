@@ -10,9 +10,11 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Main entry of the whole project
   *
   */
+
 object SessionAnalysis {
   val DEBUG = true
   val PRINT_DEBUG_INFO = true
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Session Analysis").set("spark.shuffle.consolidateFiles", "true")
       .setMaster("local[4]")
@@ -30,8 +32,10 @@ object SessionAnalysis {
     // get valid sessions
     var categoryStatAcc = RegisterCategoryAccumulators.run(sc, "")
     var sessionStatAcc = RegisterSessionAccumulators.run(sc)
+
     val sessionFilterCond = new SessionFilterCondition(
       task.sessionStartFrom, task.sessionUntil, task.keywords, task.categoryIDs)
+
     val sessionRecords = SessionFilter.run(
       sc, inputPath, outputPath, sessionFilterCond, users, categoryStatAcc, sessionStatAcc)
       .collect()

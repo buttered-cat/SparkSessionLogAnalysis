@@ -38,9 +38,20 @@ object SessionFilter {
 
     val sessionRecords = sc.textFile(inputPath, numProcessors)
       .map(line => line.split("\t"))
-      .filter(condition.value isValidClick)
-      .filter(aggregateCategory(_, categoryStatAcc))
+
+      .filter(rec =>
+        {
+          if(rec(sessionRawIndex("keywords")) != " ")
+            sessionStatAcc.addKeyword(
+              (rec(sessionRawIndex("sessionID")), rec(sessionRawIndex("keywords")))
+            )
+          true
+        }
+      )
+
+      .filter(condition.value.isValidClick(_, sessionStatAcc))
       .filter(aggregateSessions(_, sessionStatAcc))
+      .filter(aggregateCategory(_, categoryStatAcc))
 
       .map(rec => (rec(sessionRawIndex("userID")),
         Array(rec(sessionRawIndex("sessionID"))
@@ -57,6 +68,7 @@ object SessionFilter {
           , rec(sessionRawIndex("payProductID"))
           , rec(sessionRawIndex("reservedField"))
         )))
+
 
       .join(users)
 
